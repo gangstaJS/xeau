@@ -1,0 +1,23 @@
+.t {
+	color: red;
+
+	+ p {
+		background-color: blue;
+		transform: translateX(-50%);
+
+		+ a {
+			&:hover {
+				background-color: tan;
+				
+			}
+		}
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	&:hover {
+		background-color: black;
+	}
+}

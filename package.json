@@ -1,0 +1,25 @@
+{
+  "name": "xeau",
+  "version": "0.0.1",
+  "private": "true",
+  "scripts": {
+    "test": "grunt build",
+    "start": "node static-server.js"
+  },
+  "devDependencies": {
+    "connect": "latest",
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-remove-logging": "latest",
+    "grunt-contrib-sass": "latest",
+
+    "grunt-ssh": "latest",
+    "grunt-template": "latest",
+    "serve-static": "latest",
+    "grunt-autoprefixer": "latest"
+  }
+}

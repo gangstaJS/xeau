@@ -1,0 +1,65 @@
+<script type='text/javascript'>
+
+function viewBack()
+{
+	var f = document.forms['holder'];
+	if (f)
+	{
+		var back = f.elements['back'].value;
+		if (back)
+		{
+			window.location = back;
+			return true;
+		}
+	}
+
+	history.back();
+	return false;
+}
+
+function updateCheckbox(object_id, value)
+{
+	var f = document.forms['holder'];
+	if (f && f.elements && f.elements.length)
+	{
+		var id = 'u_' + object_id;
+		var checked = 0;
+
+		for (var i = 0; i < f.elements.length; i++)
+		{
+			var e = f.elements[i];
+
+			if (e.id == id && e.checked) checked++;
+		}
+
+		var e = document.getElementById('o_' + object_id);
+
+		if (e)
+		{
+			e.checked = checked ? true : false;
+			e.disabled = checked ? true : false;
+		}
+	}
+}
+
+</script>
+
+<h1>{*48}Исполнение приговора{/48}</h1>_MESSAGE_<p>
+
+<form name=holder method=post action='/holder'>
+<input type=hidden name=back value='_BACK_'>
+<table class=list width=100% cellpadding=0 cellspacing=0 border=0>
+<tr>
+ <td colspan=3>{*839}Выберите файлы для закрытия (из запомненных и публичных объектов){/839}:</td>
+</tr>
+_BODY_
+</table>
+<p>
+{*840}Причина закрытия (домашняя страница + раздел "Жалобы правообладателей"){/840}:<p>
+_SELECT_CLAIM_
+<p>
+_COUNTRY_LIST_
+<input type=submit value="{*841}исполнить{/841}" class=button>&nbsp;
+<input type=button value="{*842}вернуться{/842}" class=button onclick="return viewBack();">
+
+</form>

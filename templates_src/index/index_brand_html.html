@@ -1,0 +1,438 @@
+<script src="/js/jquery.min.js"></script>
+
+<center style='margin: -16px -16px -28px;'>
+
+<div style="background-color:#f8f8f8;">
+
+	<div style="width:964px; margin:0 auto; overflow:auto;">
+		<style type="text/css">
+			.ex_title {color: #333; font-size: 18px;}
+			.ex_desc {color: #707070; font-size: 13px;}
+		</style>
+		<div style="width:540px; float:left; padding:25px 0; text-align:left;">
+			<h1 class="ex_title">{*600}"Экспресс файлы" - сервис обмена информацией.{/600}</h1>
+			<p class="ex_desc">
+			{*601}
+			Вы можете анонимно воспользоваться сервисом хранения, пересылки и обмена файлов, в этом случае 
+			доступ к объекту будет возможен только с помощью ключа, который Вы получите при создании объекта. 
+			Если объект не использовался более 30 дней, он может быть удален системой.
+			{/601}
+			</p>
+		</div>
+
+		<div style="padding-left: 24px;overflow: visible;float: right;width: 335px;padding-top: 55px;">
+			<form method="post" action="/edit_storage">
+				<input type="submit" value="{*602}создать{/602}" class="button ex" style="float: left;">
+			</form>
+			<div style="overflow: visible;float: right;">
+				<form method="post" action="/storage">
+					<input type="text" name="key" value="" class="ex" autocomplete="off" maxlength="12">
+					<input type="submit" value="{*604}получить{/604}" class="button ex" style="border-radius:0 3px 3px 0; float: left;">
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<style>#html-id { position: relative; overflow: hidden; } #html-id > img[width="1"] { position: absolute; top: -30px; } </style>
+<div id="html-id">_HTML_</div>
+
+<!-- // -->
+<link rel="stylesheet" type="text/css" href="/express_send/css/express_send.css">
+<link rel="stylesheet" href="/express_send/css/intlTelInput.css">
+
+<script src="/express_send/js/fox_express.js"></script>
+<script src="/express_send/js/intlTelInput.min.js"></script>
+<script type="text/javascript">
+	var fox_note = {
+		TO_SHORT:     '{*925}Номер слишком короткий{/925}',
+		TO_LONG:      '{*926}Номер слишком длинный{/926}',
+		ONLY_NUMBERS: '{*927}Номер может содержать только цифры{/927}',
+		DEF_INVALID:  '{*928}Номер не валидный{/928}'
+	};
+</script>
+
+<div class="note_wr" id="fox_note"></div>
+
+<div class="fox_wrap_top">
+    <div class="fox_wrap clearfix">
+        <div class="fox_col1">
+        	<div class="fox_h">{*918}Экспресс письмо{/918}</div>
+        	<div class="fox_desc">
+        		{*919}Если получатель не зарегистрирован в системе, сообщение все-равно доставится.<br>
+				На указанный телефон будет выслана SMS с информацией о доступе к аккаунту.{/919}
+			</div>
+
+			<div contenteditable="true" class="fox_body" data-ph="{*920}Сообщение{/920}"></div>
+
+			<div class="fox_send_ctrl">
+				<input type="tel" id="fox_exp_phone" name="fox_phone"> <span>@ex.ua</span> <button class="fox_btn" id="fox_exp_send">{*922}Отправить{/922}</button>
+			</div>
+			<span id="fox_err_send"></span>
+        </div>
+
+        <!-- / -->
+
+        <div class="fox_col2">
+        	<div class="fox_h">{*923}Экспресс регистрация в EXMAIL{/923} <i class="mail-howto"><div>Как это работает</div></i></div>
+        	<div class="fox_desc">{*924}Чтобы создать почтовый ящик на ex.ua, достаточно лишь написать свой номер телефона.{/924}</div>
+
+        	<div class="fox_phone_bl">
+				<input type="tel" data-express-reg='1' name="fox_phone"> <span>@ex.ua</span> <button id="fox_create" class="fox_btn" style="float:right">{*602}Создать{/602}</button>
+			</div>
+			<span id="fox_err_reg"></span>
+        </div>
+    </div>
+</div>
+
+<div class="mail-howto-bg"></div>
+<div class="mail-howto-video">
+	<i class="mail-howto-video-close"></i>
+	<iframe width="640" height="368" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
+
+<!-- // -->
+
+<div style="width:964px; margin:0 auto; overflow:auto;" id="fox_news">
+
+	<div class="news">
+
+		<b>Новости</b>
+
+		<!-- <iframe scrolling="no" frameborder="0" style="border:none;" height="650" width="590" src="http://178.62.162.34:5050/news"></iframe> -->
+
+		<div id="news">
+
+			<ul class="top">
+				<!-- <li data-tab="0" class="active"><span>Все</span></li>
+				<li data-tab="2"><span>Политика</span></li>
+				<li data-tab="1"><span>Экономика</span></li>
+				<li data-tab="3"><span>Происшествия</span></li>
+				<li data-tab="4"><span>Спорт</span></li>
+				<li data-tab="5"><span>Общество</span></li>
+				<li data-tab="6"><span>Авто</span></li> -->
+			</ul>
+
+			<div class="watch" data-category="0">
+				<ul id="ti"></ul>
+			</div>
+
+			<script type="text/javascript">
+
+			function ftime(ts){
+				var ms=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],
+					a=new Date(ts*1000),y=a.getFullYear(),m=ms[a.getMonth()],d=a.getDate(),h=a.getHours(),nm=a.getMinutes();
+				if(h<10)h='0'+h;if(nm<10)nm='0'+nm;
+				var n=new Date(),r='',m0=((n.getTime())/1000)|0,m1=((a.getTime())/1000)|0;
+				if(n.getFullYear()==a.getFullYear()&&n.getMonth()==a.getMonth()&&n.getDate()==a.getDate()){r=h+':'+nm;}
+				else if((m0-m1)/60/60<23){r=h+':'+nm;}
+				else if(n.getFullYear()==a.getFullYear()){r=d+' '+m;}
+				else{m=a.getMonth()+1;if(m<10)m='0'+m;if(d<10)d='0'+d;r=d+'.'+m+'.'+y;}
+				return r;
+			}
+
+			var loadNews = function(){};
+
+			$(function(){
+
+				var top=$('#news .top'), ti=$('#ti'), ht='http://178.62.162.34:7072';
+				
+				var menu=function(m){
+					var ln=[];
+					for(var i=0,len=m.length;i<len;++i){
+						var item = $('<li>',{'data-tab':m[i].id}).append($('<span>').text(m[i].name));
+						ln.push(item);
+						// console.log(item);
+					}
+					top.empty().append(ln);
+					$('li',top).first().addClass('active');
+				};
+
+				var draw=function(n){
+					var ln=[],hr='',im='';
+					for(var i=0,len=n.length;i<len;++i){
+						hr=ht+(n[i].promo?'/goto/':'/go/')+n[i].key;
+						im=(n[i].promo?ht:'')+n[i].img;
+						ln.push($('<li>').append(
+							$('<a>',{'target':'_blank','href':hr}).append(
+								$('<div>',{'class':'im','style':'background:#'+n[i].color+' url('+im+') center center /cover no-repeat'}).append(n[i].video?$('<img>',{'src':"/i/news-play.png"}):[])
+							),
+							$('<div>',{'class':'of'}).append(
+								$('<a>',{'target':'_blank','href':hr}).text(n[i].name.replace(/&quot;/g,'"')),
+								$('<p>').html(n[i].desc),
+								$('<span>',{'class':'tm'}).text(ftime(n[i].utm)+" - "+n[i].site)
+							)
+						).addClass(n[i].promo?'pro':''));
+					}
+					ti.empty().append(ln);
+				};
+
+				top.on('click', 'li',function(){
+					var self = $(this);
+					$.getJSON(ht+'/get',{c:self.data('tab')},function(data){
+						$('li', top).removeClass('active');
+						self.addClass('active');
+						draw(data.list);
+					});
+				});
+
+				loadNews = function() {
+					$.getJSON(ht+'/get',{c:0},function(data){
+
+						menu(data.menu);
+						draw(data.list);
+
+						var offset_top=0,ext_menu=[];
+						$('li',top).each(function(n){
+							if(n==0){
+								offset_top=$(this).offset().top;
+							}else if($(this).offset().top!=offset_top){
+								ext_menu.push($(this));
+							}
+						});
+
+						// console.log(ext_menu.length, offset_top);
+
+						if(ext_menu.length>0){
+
+							var more=$('<div>',{'class':'more'}).append(
+								$('<span>').text('Еще'),
+								$('<i>')
+							);
+							
+							var list=$('<div>',{'class':'mlist'}).append(ext_menu);
+
+							top.after(more);
+							more.after(list);
+
+							more.click(function(){
+								more.toggleClass('active');
+								return false;
+							});
+
+							$(document).click(function(){
+								more.removeClass('active');
+							});
+
+							top.on('click', 'li',function(){
+								$('span',more).text('Еще');
+							});
+
+							list.on('click', 'li',function(){
+								var self = $(this);
+								$('span',more).text(self.find('span').text());
+								$.getJSON(ht+'/get',{c:self.data('tab')},function(data){
+									$('li',top).removeClass('active');
+									self.addClass('active');
+									draw(data.list);
+								});
+							});
+
+							top = top.add(list);
+						}
+					});
+				};
+
+				if ('_CAN_VIEW_' != '0') {
+					loadNews();
+				}
+			});
+
+			$(function(){
+
+				var $old=$('body > table'), $main=$('#main_page'), $login=$('.menu_login');
+
+				$old.after($main);
+
+				$('.ex_file').click(function(){
+					$main.remove();
+					$old.show();
+					$("#html-id").show();
+					loadNews();
+				});
+
+				$('.main_login').click(function(){
+					$(this).toggleClass('active');
+				});
+
+				if ($login.length > 0) {
+					$('.main_login').hide();
+					$('.main_register').text($login.text()).attr('href','/user/'+$login.text());
+				}
+
+				if ('_CAN_VIEW_' == '0') {
+					$('.ex_file, #html-id, #fox_news').hide();
+				}
+
+				// 
+
+				var $top=$('.top_right');
+
+				var mktop=function(src, more, text){
+					$.ajax({url:src,dataType:"TEXT",data:{per:10}}).done(function(data){
+						var list=[];
+						list.push($('<span>').text(text));
+						var ll=data.split(/\n/);
+						for(var i=0;i<ll.length;++i){
+							if(ll[i]!=""){
+								var ln=ll[i].split(','), href=ln[1];
+								ln.shift(); ln.shift();
+								list.push($('<div>').append($('<a>',{'href':"/"+href}).text(ln.join(","))))
+							}
+						}
+						list.push($('<a>',{'class':'more','href':more}).text("Полный список"));
+						$top.append(list);
+					});
+				};
+
+				mktop("/r_top", "/top", "Самое популярное");
+				mktop("/r_top/1", "/top/1", "Самое обсуждаемое");
+				mktop("/r_top/2", "/top/2", "Самое рекомендуемое");
+			});
+
+			$(function(){
+				$(".mail-howto").click(function(){
+					$(".mail-howto-bg,.mail-howto-video").show();
+					$(".mail-howto-video iframe").attr("src", "https://videopay.net/embed/if/4VIjQBZmEeWPJJNAGpT1tw");
+				});
+				$(".mail-howto-video-close").click(function(){
+					$(".mail-howto-bg,.mail-howto-video").hide();
+					$(".mail-howto-video iframe").attr("src", null);
+				});
+			});
+
+			</script>
+
+		</div>
+
+	</div>
+
+	<div id='main_page'>
+		<div class="main_menu">
+			<div class="main_login">{*40}Вход{/40}</div>
+			<a href="http://www.ex.ua/register" class="main_register">Регистрация</a>
+			<div class="login_form">
+				<form name="login" method="post" action="/login">
+					<!-- <input type="hidden" name="back" value="/register"> -->
+					<div><input type="text" name="login" value="" class="ex" maxlength="64" placeholder="{*500}логин{/500}"></div>
+					<div><input type="password" name="password" value="" class="ex" maxlength="64" placeholder="{*501}пароль{/501}"></div>
+					<div style="display:none"><input type="checkbox" name="flag_permanent" value="1">{*503}запомнить меня{/503}</div>
+					<div style="display:none"><input type="checkbox" name="flag_not_ip_assign" value="1">{*504}без привязки по IP{/504}</div>
+					<input type="submit" value="{*505}войти{/505}" class="button ex">
+				</form>
+				<a class="login_footer" href="/password">Забыл пароль</a>
+			</div>
+		</div>
+		<div class="main_center">
+			<div class="ex_storage">
+				<form method="post" action="/edit_storage">
+					<input type="submit" value="{*602}создать{/602}" class="button ex" style="float:left; height:34px;">
+				</form>
+				<form method="post" action="/storage">
+					<input type="submit" value="{*604}получить{/604}" class="button ex" style="border-radius:0 3px 3px 0; float:right; height:34px;">
+					<input type="text" name="key" placeholder="{*609}ключ доступа{/609}" value="" class="ex" autocomplete="off" maxlength="12" style="float:right; height:34px; padding-left:12px; width:115px;">
+				</form>
+			</div>
+			<div onclick="document.location='https://mail.ex.ua/';return false;" class="ex_mail"></div>
+			<div class="ex_file"></div>
+			<div onclick="document.location='http://videopay.net/channel/y3m68F6YEeStFJNAGpT1tw/video';return false;" class="ex_videopay"></div>
+			
+		</div>
+		<div class="main_footer">ехmail – твоя пошта на ex.ua</div>
+	</div>
+
+
+	<div style="width: 335px; float: right; margin: 32px 0 0">
+
+<!-- Gismeteo informer START -->
+<link rel="stylesheet" type="text/css" href="https://www.gismeteo.ua/static/css/informer2/gs_informerClient.min.css">
+<div id="gsInformerID-ovY10eyK0RbLq2" class="gsInformer" style="width:306px;height:227px">
+  <div class="gsIContent">
+   <div id="cityLink">
+     <a href="https://www.gismeteo.ua/weather-kyiv-4944/" target="_blank">Погода в Киеве</a>
+   </div>
+   <div class="gsLinks">
+     <table>
+       <tr>
+         <td>
+           <div class="leftCol">
+             <a href="https://www.gismeteo.ua" target="_blank">
+               <img alt="Gismeteo" title="Gismeteo" src="https://www.gismeteo.ua/static/images/informer2/logo-mini2.png" align="absmiddle" border="0" />
+               <span>Gismeteo</span>
+             </a>
+           </div>
+           <div class="rightCol">
+             <a href="https://www.gismeteo.ua/weather-kyiv-4944/14-days/" target="_blank">Погода на 2 недели</a>
+           </div>
+           </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<script src="https://www.gismeteo.ua/ajax/getInformer/?hash=ovY10eyK0RbLq2" type="text/javascript"></script>
+<!-- Gismeteo informer END -->
+
+	</div>
+
+
+	<div class='link_body'>
+
+		<!-- _LI NK_BO DY_ -->
+
+		<!--  AdRiver code START. Type:poster Site: ex PZ: 0 BN: 0 -->
+		<script type="text/javascript">
+		function adriverPoster(L){
+		    if(typeof(ar_cn)=="undefined")ar_cn=1;
+		    var W=window,D=document,E=D.documentElement,T=0,N=ar_cn,P=0,C=D.compatMode=="CSS1Compat",
+		        X='<scr'+'ipt type="text/javascript">var ar_bnum='+N+';setTimeout(function(e){if(!self.CgiHref){document.close();e=parent.document.getElementById("ar_container_"+ar_bnum);e.parentNode.removeChild(e)}},3000);',
+		        Y='<\/sc'+'ript><sc'+'ript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https:' : 'http:') + ''+L+'&tail256='+escape(D.referrer||'unknown')+'&rnd='+Math.round(Math.random()*999999999)+'"><\/sc'+'ript>';
+		    function G(){if(T++<100){var ph=document.getElementById('ad_ph_'+N);if (ph){var c=ph.previousSibling;c.innerHTML='<iframe id="ar_container_'+N+'" width=1 height=1 marginwidth=0 marginheight=0 scrolling=no frameborder=0><\/iframe>'}else{setTimeout(arguments.callee,100);return}var o=D.getElementById('ar_container_'+N);if(o){try{var d=o.contentDocument||(W.ActiveXObject&&W.frames['ar_container_'+N].document);if(d){d.write(X+Y)}else setTimeout(arguments.callee,100)}catch(e){try{o.src = "javascript:{document.write('"+X+'document.domain="'+D.domain+'";'+Y+"')}";return}catch(E){}}}else setTimeout(arguments.callee,100)}}
+		    function A(e,t,f){if(e.addEventListener)e.addEventListener(t,f,false);else if(e.attachEvent)e.attachEvent('on'+t,f)}
+		    function R(e,t,f){if(e.removeEventListener)e.removeEventListener(t,f,false);else if(e.detachEvent)e.detachEvent('on'+t,f)}
+		    function S(){var ch=self.innerHeight||C&&E.clientHeight||D.body.clientHeight,st=self.pageYOffset||C&&E.scrollTop||D.body.scrollTop;if(P>=st&&st+ch>=P){R(W,'scroll',S);G()}}
+		    A(W,'load',function(){var o=D.getElementById('ad_ph_'+N);if(o){while(o.offsetParent){P+=o.offsetTop;o=o.offsetParent}A(W,'scroll',S);S()}});
+		    D.write('<div style="position:absolute;visibility:hidden;height:0px;"><\/div><div id="ad_ph_'+N+'"><\/div>');
+		    ar_cn++;
+		}
+		adriverPoster('//ad.adriver.ru/cgi-bin/erle.cgi?sid=202555&target=blank&bt=49&pz=0');
+		</script>
+		<!--  AdRiver code END  -->
+
+		<div class="top_right"></div>
+
+	</div>
+
+</div>
+
+</center>
+
+<script type='text/javascript'>
+function initStorage()
+{
+	var a = 1;
+	var f = document.forms['storage'];
+	if (f)
+	{
+		var e = f.elements['key'];
+		if (e) e.focus();
+	}
+}
+
+onLoadAction.push(initStorage);
+</script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter26207799 = new Ya.Metrika({id:26207799, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true, ut:"noindex"}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/26207799?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-54840297-1', 'auto');
+ga('send', 'pageview');
+</script>

@@ -1,0 +1,55 @@
+<script type='text/javascript'>
+function selectView()
+{
+	var default_view_id = _DEFAULT_VIEW_ID_;
+	var default_sort_id = _DEFAULT_SORT_ID_;
+
+	var f = document.forms['select_view'];
+	if (f)
+	{
+		var view_id = f.elements['view_id'].selectedIndex;
+		var sort_id = f.elements['sort_id'].selectedIndex;
+
+		if (view_id == default_view_id && sort_id == default_sort_id)
+		{
+			f = document.forms['select_view_0'];
+			if (f) f.submit();
+		}
+		else
+		{
+			f = document.forms['select_view_1'];
+			if (f)
+			{
+				f.elements['v'].value = view_id + "-" + sort_id;
+				f.submit();
+			}
+		}
+	}
+}
+</script>
+
+<table border=0 cellpadding=0 cellspacing=0><tr>
+
+<td>
+
+<form name='select_view_0'>_VIEW_FORM_</form>
+<form name='select_view_1'>_VIEW_FORM_<input type=hidden name=v value=''></form>
+<form name='select_view'>
+ <select class=small name='view_id' onchange='selectView();'><option>{*694}картинками{/694}<option_VIEW_1_SELECTED_>{*695}списком{/695}</select>
+ <select class=small name='sort_id' onchange='selectView();'><option>{*696}новое в начале{/696}<option_SORT_1_SELECTED_>{*697}новое в конце{/697}</select>
+</form>
+
+</td>
+
+_SEARCH_
+
+</tr></table>
+
+<p>
+_BROWSE_
+<p>
+<table width=100% border=0 cellpadding=0 cellspacing=8 class=include__VIEW_ID_>
+_BODY_
+</table>
+<p>
+_BROWSE_

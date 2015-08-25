@@ -20,6 +20,9 @@
     "grunt-ssh": "latest",
     "grunt-template": "latest",
     "serve-static": "latest",
-    "grunt-autoprefixer": "latest"
+    "grunt-autoprefixer": "latest",
+
+    "recursive-readdir": "latest",
+    "fs-extra": "latest"
   }
 }

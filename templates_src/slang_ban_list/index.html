@@ -1,0 +1,19 @@
+<h1>{*0}Нецензурные слова{/0}</h1><p>
+<form action='/add_slang_ban'>
+<input type=text name=slang maxlength=255 style='width: 120px;'>&nbsp;
+<input type=text name=comment maxlength=255 style='width: 240px;'>&nbsp;
+<input type=submit value="{*0}добавить{/0}" class=button>
+</form>
+<p>
+<small>Слова исключения:</small>&nbsp;<span class=small>_SLANG_BAN_EX_</span>
+<p>
+<table width=100% class=list border=0 cellpadding=0 cellspacing=0>
+<tr>
+ <th align=left>{*0}слово{/0}</th>
+ <th align=left>{*0}кто{/0}</th>
+ <th align=left>{*0}время{/0}</th>
+ <th align=left>{*0}комментарий{/0}</th>
+ <th align=right>{*640}действия{/640}</th>
+</tr>
+_BODY_
+</table>

@@ -1,0 +1,22 @@
+{*528}Объект{/528}: <a href='/view/_OBJECT_ID_'><b>_TITLE_</b></a><p>
+
+<script type='text/javascript'>
+
+function editObject()
+{
+	window.location = '/edit/_OBJECT_ID_?back=_BACK_PARAM_';
+	return true;
+}
+
+</script>
+
+<h1>{*7}Редактирование параметров{/7}</h1>
+<p>
+<form method=post action='/edit_flags/_OBJECT_ID_'>
+<input type=hidden name=update value=1>
+<input type=hidden name=back value='_BACK_'>
+_SELECT_FLAGS_
+<p>
+<input type=submit value="{*529}сохранить{/529}" class=button>&nbsp;
+<input type=button value="{*530}вернуться{/530}" class=button onclick="return editObject();">
+</form>

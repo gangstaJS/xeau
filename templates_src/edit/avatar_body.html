@@ -1,0 +1,31 @@
+<table width=100% cellspacing=0 cellpadding=0 border=0><tr><td>
+<select name=avatar_id onchange='updateAvatar(this);'><option value=0>-_BODY_</select></td><td align=right style='padding-left: 20px;'>
+</td></tr></table>
+
+<script type='text/javascript'>
+var avatar_info = new Array(['/i/e.gif', 1, 1, ''], _LIST_);
+function updateAvatar(e)
+{
+	var info = avatar_info[e.selectedIndex];
+	var av = document.getElementById('avatar');
+	if (av)
+	{
+		av.src = info[0];
+		av.width = info[1];
+		av.height= info[2];
+		av.alt= info[3];
+		av.title= info[3];
+	}
+}
+function initAvatar()
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		updateAvatar(f.elements['avatar_id']);
+	}
+}
+
+onLoadAction.push(initAvatar);
+
+</script>

@@ -1,0 +1,70 @@
+<script type='text/javascript'>
+
+function saveSurvey()
+{
+	var f = document.forms['survey'];
+	if (f)
+	{
+		var e = f.elements['email'].value;
+
+		if (e.indexOf('@') != -1)
+		{
+			updateStatus('');
+
+			request_post('/r_survey', {
+					email		: e
+				}, saveSurveyResponse, 1);
+		}
+		else
+		{
+			updateStatus("{*819}Пожалуйста, укажите свой email адрес.{/819}");
+		}
+
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+function saveSurveyResponse(code, data, id)
+{
+	if (code == 200 && data == '1')
+	{
+		var e = document.getElementById('survey_div');
+		if (e) e.innerHTML = "<span class=r_button><span>{*820}информация сохранена{/820}</span></span><p>";
+
+	}
+	else
+	{
+		updateStatus("{*821}Произошла ошибка при отправке информации.{/821}");
+	}
+}
+
+function updateStatus(msg)
+{
+	var e = document.getElementById('survey_status');
+	if (e) e.innerHTML = msg ? '<font color=red>' + msg + '</font><p>' : '';
+}
+
+</script>
+
+<div style='border: 1px solid #ddd; width: 776px; padding: 12px; background-color: #f4f4f4;'>
+<h1>{*817}Важная информация{/817}</h1><p>
+{*815}{/815}
+<p>
+
+<div id='survey_div'>
+<form name=survey action='/survey' method=post>
+<div id='survey_status'></div>
+{*818}email:{/818}<br>
+<input type=text name=email style='width: 180px' maxlength=128>
+<input type=submit value='{*803}отправить{/803}' onclick='return saveSurvey();'>
+</form>
+<p>
+</div>
+
+{*816}{/816}
+</div>
+<p>

@@ -1,0 +1,28 @@
+<script type='text/javascript'>
+function viewBack()
+{
+	var f = document.forms['agreed'];
+	if (f)
+	{
+		var back = f.elements['back'].value;
+		if (back)
+		{
+			window.location = back;
+			return true;
+		}
+	}
+
+	history.back();
+	return false;
+}
+</script>
+<h1>{*52}Правила ресурса{/52}</h1><br>
+{*863}
+{/863}
+<form action='/agreed' name=agreed method=post>
+<input type=hidden name=back value='_BACK_'>
+<input type=hidden name=object_id value='_OBJECT_ID_'>
+<input type=hidden name=link_id value='_LINK_ID_'>
+<input type=hidden name=original_id value='_ORIGINAL_ID_'>
+<input type=submit value='{*861}я согласен с правилами{/861}' class=button><input type=button value='{*862}я не согласен с правилами{/862}' class=button onclick='return viewBack();'>
+</form>

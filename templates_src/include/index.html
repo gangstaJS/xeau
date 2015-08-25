@@ -1,0 +1,51 @@
+{*569}Раздел{/569}: <a href='/view/_ORIGINAL_ID_'><b>_TITLE_</b></a><p>
+
+<script type='text/javascript'>
+
+function viewBack()
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		var back = f.elements['back'].value;
+		if (back)
+		{
+			window.location = back;
+			return true;
+		}
+	}
+
+	history.back();
+	return false;
+}
+
+function checkAll(checked)
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		for (var i = 0; i< f.elements.length; i++)
+		{
+			var e = f.elements[i];
+			if (e.type == 'checkbox') e.checked = checked;
+		}
+	}
+
+	return false;
+}
+
+</script>
+
+<form name=edit method=post action='/include/_ORIGINAL_ID_'>
+<input type=hidden name=back value='_BACK_'>
+<h1>{*12}Добавить в раздел из запомненных{/12}</h1><p>
+<table width=100% border=0 cellpadding=0 cellspacing=8 class=panel>
+_BODY_
+</table>
+<p>
+<input type=submit value="{*570}добавить{/570}" class=button>&nbsp;
+<input type=button value="{*571}вернуться{/571}" class=button onclick="return viewBack();">&nbsp;
+<input type=button value="{*751}выделить всё{/751}" class=small_button onclick="return checkAll(true);">&nbsp;
+<input type=button value="{*752}очистить всё{/752}" class=small_button onclick="return checkAll(false);">
+
+</form>

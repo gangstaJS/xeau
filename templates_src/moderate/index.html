@@ -1,0 +1,44 @@
+<script type='text/javascript'>
+
+function loadClaimList(object_id)
+{
+	updateStatus(object_id, "{*813}Загружается список...{/813}<p>");
+
+	request('/r_claim_list/' + object_id, loadClaimListResponse, object_id);
+
+	return false;
+}
+
+function loadClaimListResponse(code, data, object_id)
+{
+	updateStatus(object_id, code == 200 ? data : "{*812}Произошла ошибка при запросе списка.{/812}<p>");
+}
+
+function updateStatus(object_id, msg)
+{
+	var e = document.getElementById('claim_list_' + object_id);
+	if (e) e.innerHTML = msg;
+}
+
+</script>
+
+<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td width=800 valign=top>
+
+<table class=list width=800 cellpadding=0 cellspacing=0 border=0>
+<tr><td><h1>{*31}Модерация информации{/31}</h1></td></tr>
+_BODY_
+</table>
+<p>
+_BROWSE_
+
+</td><td valign=top align=right>
+
+_TREE_
+
+<p>
+<span class=r_button_small><a href='/update_moderate'>{*854}обновить дерево{/854}</a></span>
+
+<p>&nbsp;<p>
+<a href='/view/391129'><b>{*826}Комментарии...{/826}</b></a>
+
+</td></tr></table>

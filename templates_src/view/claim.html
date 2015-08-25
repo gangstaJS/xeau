@@ -1,0 +1,117 @@
+<script type='text/javascript'>
+
+function saveClaim()
+{
+	var f = document.forms['claim'];
+	if (f)
+	{
+		var t = f.elements['type_id'];
+		t = t ? t.options[t.selectedIndex].value : 0;
+
+		if (t != '0')
+		{
+			updateStatus('');
+
+			request_post('/r_claim/_OBJECT_ID_', {
+					type_id		: t,
+					post		: f.elements['post'].value,
+					email		: f.elements['email'] ? f.elements['email'].value : ''
+				}, saveClaimResponse, _OBJECT_ID_);
+		}
+		else
+		{
+			updateStatus("{*805}Пожалуйста, выберите причину жалобы.{/805}");
+		}
+
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+function saveClaimResponse(code, data, object_id)
+{
+	if (code == 200 && data == '1')
+	{
+		toggleClaim('claim_div', 'none');
+
+		var e = document.getElementById('claim_button');
+		if (e)
+		{
+			e.innerHTML = "<span>{*807}жалоба отправлена{/807}</span>";
+			e.style.display = 'inline';
+		}
+	}
+	else
+	{
+		updateStatus("{*806}Произошла ошибка при отправке жалобы.{/806}");
+	}
+}
+
+function toggleClaim(name, display)
+{
+	var e = document.getElementById(name);
+	if (e) e.style.display = display;
+}
+
+function openClaim()
+{
+	toggleClaim('claim_div', 'block');
+	toggleClaim('claim_button', 'none');
+
+	scrollToElement(document.getElementById('claim_scrollto'));
+
+	return false;
+}
+
+function cancelClaim()
+{
+	updateStatus('');
+
+	toggleClaim('claim_div', 'none');
+	toggleClaim('claim_button', 'inline');
+
+	return false;
+}
+
+function scrollToElement(e)
+{
+	var x = 0;
+	var y = 0;
+              
+	while (e)
+	{
+		x += e.offsetLeft;
+		y += e.offsetTop;
+
+		e = e.offsetParent;
+	}
+                        		      
+	window.scrollTo(x, y);
+}
+
+function updateStatus(msg)
+{
+	var e = document.getElementById('claim_status');
+	if (e) e.innerHTML = msg ? '<font color=red>' + msg + '</font><p>' : '';
+}
+
+</script>
+
+<p>
+&nbsp;
+<p>
+<span id='claim_button' class=r_button><a href='/view/_OBJECT_ID_' onclick='return openClaim();'>{*799}пожаловаться{/799}</a></span>
+<div id='claim_div' style='border: 1px solid #ddd; width: 500px; padding: 12px; background-color: #f4f4f4; display: none;'>
+<form name=claim action='/claim/_OBJECT_ID_' method=post>
+<h1>{*800}Жалоба{/800}</h1><p>
+<div id='claim_status'></div>
+{*801}причина:{/801}<br>
+<select name=type_id>_SELECT_CLAIM_</select><br>
+{*802}комментарий:{/802}<br>
+<textarea name=post rows=5 style='width: 480px' maxlength=65535></textarea>_EMAIL_<p>
+<input id='claim_scrollto' type=submit value='{*803}отправить{/803}' onclick='return saveClaim();'>&nbsp;<input type=button value='{*804}отменить{/804}' onclick='return cancelClaim();'>
+</form>
+</div>

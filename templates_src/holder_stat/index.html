@@ -1,0 +1,30 @@
+<script type='text/javascript'>
+
+function loadTransactionList(action_id)
+{
+	updateStatus(action_id, "{*813}Загружается список...{/813}<p>");
+
+	request('/r_holder_transaction_list/' + action_id, loadTransactionListResponse, action_id);
+
+	return false;
+}
+
+function loadTransactionListResponse(code, data, action_id)
+{
+	updateStatus(action_id, code == 200 ? data : "{*812}Произошла ошибка при запросе списка.{/812}<p>");
+}
+
+function updateStatus(action_id, msg)
+{
+	var e = document.getElementById('transaction_list_' + action_id);
+	if (e) e.innerHTML = msg;
+}
+
+</script>
+
+<h1>{*51}Закрытые объекты{/51}</h1><p>
+<table width=100% border=0 cellpadding=0 cellspacing=8 class=panel>
+_BODY_
+</table>
+<p>
+_BROWSE_

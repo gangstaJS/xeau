@@ -1,0 +1,25 @@
+<h1>{*21}Группа доступа{/21}</h1><p>
+<form action='/edit_gp/_GP_ID_'>
+<input type=text name=name value='_GP_NAME_EDIT_' maxlength=64 style='width: 180px;'><input type=submit value="{*652}изменить название{/652}" class=button><br>
+<input type=text name=description value='_GP_DESCRIPTION_' maxlength=255 style='width: 320px;' class=small title='{*869}Краткое описание группы{/869}'>
+<input type=text name=object_id value='_GP_OBJECT_ID_' maxlength=10 style='width: 64px;' class=small title='{*870}Номер объекта с правилами группы{/870}'>
+</form>
+_GP_INFO_
+<p>
+<table width=100% class=list border=0 cellpadding=0 cellspacing=0>
+<tr>
+ <th align=left>{*653}логин{/653}</th>
+ <th align=left>{*639}доступ{/639}</th>
+ <th align=left>{*648}дал{/648}</th>
+ <th align=left>{*833}когда{/833}</th>
+ <th align=right>{*640}действия{/640}</th>
+</tr>
+_BODY_
+</table>
+_FORM_ADD_USER_
+<p>
+<table width=800 border=0 cellpadding=0 cellspacing=0><tr><td>
+<span class=r_button><a href='/user_gp'>{*655}мои группы{/655}</a></span>
+</td><td align=right>
+_DO_DELETE_
+</td></tr></table>

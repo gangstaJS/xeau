@@ -1,0 +1,26 @@
+<h1>{*44}Карта переводов{/44}</h1><p>
+<script type='text/javascript'>
+function ru(id)
+{
+	var e = document.getElementById('ru' + id);
+	var f = document.forms['language'];
+
+	if (e && f && f.elements['xx' + id]) f.elements['xx' + id].value = e.innerHTML;
+
+	return false;
+}
+</script>
+<form action='/language_list' method=post name='language'>
+<input type=hidden name=language_id value='_LANGUAGE_ID_'>
+<table class=list width=100% cellpadding=0 cellspacing=0 border=0>
+<tr>
+ <th>&nbsp;</th>
+ <th align=left width=500>_LANGUAGE_ID_</span></th>
+ <th align=left>ru</th>
+</tr>
+_BODY_
+</table>
+<span class=small>{*781}*1 -название языка, *196 - анонс{/781}</span>
+<p>
+<input type=submit value='{*534}сохранить{/534}'>
+</form>

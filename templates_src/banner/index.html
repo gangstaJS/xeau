@@ -1,0 +1,56 @@
+<script type='text/javascript'>
+var ev_mask = 0;
+var ev_start_time = 0;
+var ev_finish_time = 0;
+var ev_time = 0;
+
+function ev_status()
+{
+	var e = document.getElementById('ev_list');
+	if (e) e.innerHTML = (ev_mask & 1 ? 'ad_start(' + ev_start_time + ')' : '') + (ev_mask == 3 ? ', ' : '') + (ev_mask & 2 ? 'ad_finish(), реальное время ролика - ' + (ev_finish_time > ev_start_time + 0.5 ? '<font color=red>' + ev_finish_time + '</font>' : ev_finish_time) + ' сек.' : '');
+}
+function ad_start(time)
+{
+	if (ev_mask & 1) return;
+	ev_mask |= 1;
+	ev_start_time = time;
+	ev_time = (new Date()).getTime();
+	ev_status();
+}
+function ad_finish()
+{
+	if (ev_mask & 2) return;
+	ev_mask |= 2;
+	ev_finish_time = Math.round(((new Date()).getTime() - ev_time) / 100) / 10;
+	ev_status();
+}
+</script>
+<h1>{*0}Баннер{/0}</h1><p>
+_BANNER_
+<table border=0 cellpadding=1 cellspacing=2>
+<tr><td align=right>Онлайн:</td><td>_ONLINE_</td><tr>
+<tr><td align=right>События:</td><td id=ev_list></td><tr>
+<tr><td align=right>Дополнительно:</td><td>_MORE_</td><tr>
+_FORM_
+_UPLOAD_
+</table>
+<p>
+
+<table class=list cellpadding=0 cellspacing=0 border=0>
+<tr>
+ <th>date</th>
+ <th align=right>users</th>
+ <th align=right>shows</th>
+ <th align=right>clicks</th>
+ <th align=right>%</th>
+</tr>
+_BODY_
+<tr>
+ <td>&nbsp;</td>
+ <td align=right><a href='/csv_banner/_BANNER_ID__KEY_PARAM_'><img src='/i/csv.gif' width=15 height=16 border=0 title='Экспорт данных в CSV формате'></a></td>
+ <td align=right><u>_SHOW_COUNT_</u></td>
+ <td align=right><u>_CLICK_COUNT_</u></td>
+ <td align=right><u>_CPS_</u></td>
+</tr>
+</table>
+_INFO_

@@ -1,0 +1,9 @@
+document.write("<a href='http://www.ex.ua/view/_OBJECT_ID_' target='_blank'>http://ex.ua/view/_OBJECT_ID_</a><br><a href='_URL_' style='display: block; width: _WIDTH_px; height: _HEIGHT_px;' class='ex_player'></a>");
+
+if (typeof(ex_player) == 'undefined')
+{
+	ex_player = new Object();
+
+	document.write("<script src='http://www.ex.ua/js/flowplayer-3.1.4.min.js' type='text/javascript'></script>");
+	document.write("<script src='http://www.ex.ua/js/ex_player.js' type='text/javascript'></script>");
+}

@@ -7,11 +7,14 @@ var css_src = [
 
 ,sass_src = [
   'css_src/common.scss'
+  ,'css_src/buttons.scss'
+  ,'css_src/inputs.scss'
   ,'css_src/edit_storage.scss'
+  ,'css_src/style_guide_page.scss'
 ]
 
 ,src_files = [
-  
+  'js_src/edit_storage.js'
 ];
 
 // --
@@ -115,14 +118,13 @@ var conf = {
 
     watch: {
       files: ['js_src/**/*.js', 'css_src/**/*.scss', 'build/lib/**/*.js'],
-      // tasks: [
-      //   'concat',
-      //   'cssmin',
-      //   'template',
-      //   'uglify',
-      //   // 'sftp',
-      //   'watch'
-      // ],
+      tasks: [
+        'concat',
+        'sass',
+        'autoprefixer',
+        'uglify',
+        'watch'
+      ],
 
       options: {
         nospawn: true,

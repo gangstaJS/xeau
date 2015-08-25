@@ -1,0 +1,33 @@
+<h1>{*0}Линк{/0}</h1><p>
+<table border=0 cellpadding=1 cellspacing=2>
+<form action='/edit_link/_LINK_ID_' method=post>
+<tr><td align=right>Название:</td><td><input type=text name=title value='_TITLE_' style='width: 420px;'></td></tr>
+<tr><td align=right>Ссылка:</td><td><input type=text name=url value='_URL_' style='width: 420px;'></td></tr>
+<tr><td align=right>Онлайн:</td><td><input type=checkbox name=flag_online value=1 _FLAG_ONLINE_></td></tr>
+<tr><td align=right>&nbsp;</td><td><input type=submit value='сохранить'></td></tr>
+</form>
+</table>
+<p>
+
+<table class=list cellpadding=0 cellspacing=0 border=0>
+<tr>
+ <th>date</th>
+ <th align=right>users</th>
+ <th align=right>shows</th>
+ <th align=right>clicks</th>
+ <th align=right>%</th>
+</tr>
+_BODY_
+<tr>
+ <td>&nbsp;</td>
+ <td align=right></td>
+ <td align=right><u>_SHOW_COUNT_</u></td>
+ <td align=right><u>_CLICK_COUNT_</u></td>
+ <td align=right><u>_CPS_</u></td>
+</tr>
+</table>
+<p>
+&nbsp;
+<p>
+<span class=r_button><a href='/link_list'>список линков</a></span>
+

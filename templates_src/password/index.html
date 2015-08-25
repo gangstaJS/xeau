@@ -1,0 +1,10 @@
+<table border=0 cellpadding=4 cellspacing=8>
+<form name=password method=post action='/password'>
+<input type=hidden name=captcha_id value=_CAPTCHA_ID_>
+<tr><td colspan=2 align=center><h1>{*4}Напомнить пароль{/4}</h1>_MESSAGE_</td></tr>
+<tr><td align=right>*{*511}email{/511}:</td><td><input type=text name=email value='_EMAIL_' style='width: 180px' maxlength=128></td></tr>
+<tr><td align=right>&nbsp;</td><td><img src='/captcha?captcha_id=_CAPTCHA_ID_' width=180 height=80 border=0 class=captcha id=captcha>&nbsp;<a href='javascript: void(0);' onclick='return captchaRefresh("_CAPTCHA_ID_");' tabindex='-1'><img src='/i/refresh.gif' title='показать другую картинку' width=16 height=16 border=0></a></td></tr>
+<tr><td align=right>*{*509}проверочное слово{/509}:</td><td><input type=text name=captcha_value value='' maxlength=16 autocomplete=off style='width: 180px'></td></tr>
+<tr><td></td><td><input type=submit value="{*520}выслать{/520}" class=button></td></tr>
+</form>
+</table>

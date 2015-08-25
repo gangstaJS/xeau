@@ -1,0 +1,34 @@
+<table cellpadding=0 cellspacing=0 border=0>
+<tr><td>
+<table border=0 cellpadding=4 cellspacing=8>
+<form method=post action='/settings'>
+<tr><td colspan=2 align=center><h1>{*3}Персональная информация{/3}</h1>_MESSAGE_</td></tr>
+<tr><td align=right>{*500}логин{/500}:</td><td><b>_LOGIN_</b></td></tr>
+<tr><td align=right>*{*750}текущий пароль{/750}:</td><td><input type=password name=password_old value='' style='width: 120px' maxlength=64></td></tr>
+<tr><td align=right>{*501}пароль{/501}:</td><td><input type=password name=password value='' style='width: 120px' maxlength=64></td></tr>
+<tr><td align=right>{*501}пароль{/501} <small>({*510}повтор{/510})</small>:</td><td><input type=password name=password2 value='' style='width: 120px' maxlength=64></td></tr>
+<tr><td align=right>*{*511}email{/511}:</td><td><input type=text name=email value='_EMAIL_' style='width: 160px' maxlength=128></td></tr>
+<tr><td align=right>{*517}имя{/517}:</td><td><input type=text name=name value='_NAME_' style='width: 160px' maxlength=128></td></tr>
+<tr><td align=right>{*518}телефон{/518}:</td><td><input type=text name=phone value='_PHONE_' style='width: 120px' maxlength=64></td></tr>
+<tr><td align=right>{*855}пол{/855}:</td><td>_SELECT_GENDER_</td></tr>
+<tr><td align=right>{*856}дата рождения{/856}:</td><td>_SELECT_BIRTHDAY_</td></tr>
+<tr><td align=right>{*845}опции{/845}:</td><td>_SELECT_FLAGS_</td></tr>
+<tr id=more_button><td align=right><span style='color: #ddd;' onclick='more();'>&gt;</span></td><td>&nbsp;</td></tr>
+<tr id=more_block style='display: none;'><td align=right>{*872}редактор{/872}:</td><td><input type=text name=editor_id value='_EDITOR_ID_' style='width: 80px' maxlength=16 title='{*873}Номер загрузки с файлом JavaScript.{/873}'></td></tr>
+<tr><td></td><td><input type=submit value="{*519}сохранить{/519}" class=button></td></tr>
+</form>
+</table>
+</td><td style='padding-left: 40px;'>
+_PAY_
+</td></tr>
+</table>
+<script type='text/javascript'>
+function more()
+{
+	var e = document.getElementById('more_button');
+	if (e) e.style.display = 'none';
+
+	var e = document.getElementById('more_block');
+	if (e) e.style.display = 'table-row';
+}
+</script>

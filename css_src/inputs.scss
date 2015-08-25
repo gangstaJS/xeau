@@ -1,0 +1,44 @@
+// oz
+
+$inputBorderRadius: 3px;
+
+input {
+	padding: 7px 10px;
+	width: 100%;
+	margin: 10px 0;
+	box-sizing: border-box;
+	box-shadow: inset 0 1px 7px rgba(0, 0, 0, 0.1);
+
+	border: {
+		color: #b7b7b7;
+		style: solid;
+		radius: $inputBorderRadius;
+		width: 1px;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+textarea {
+	@extend input;
+	min-height: 65px;
+	resize: vertical;
+}
+
+label {
+	margin-top: 10px;
+	display: block;
+}
+
+.label-text {
+	font: {
+		size: 13px;
+		weight: bold;
+	}
+
+	+ input, + textarea {
+		margin: 5px 0;
+	}
+}

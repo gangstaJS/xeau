@@ -1,0 +1,55 @@
+<h1>{*55}Удаление спама{/55}</h1><p>
+<table cellpadding=0 cellspacing=0 border=0><tr><td>
+<form name=search action='/delete_all'>
+<input type=text name=s value='_SEARCH_' style='width: 260px;'>
+<input type=submit value="поиск" class=button>
+</form>
+</td></tr></table>
+<p>
+Поиск "<b>_SEARCH_</b>" (_COUNT_):<p>
+<form name=deleter method=post action='/delete_all'>
+<input type=hidden name=do_delete value=1>
+<table class=list width=100% cellpadding=0 cellspacing=0 border=0>
+<tr>
+ <td colspan=3>Выберите объекты для удаления</td>
+</tr>
+_BODY_
+</table>
+<p>
+<input type=button value="выделить всё" class=small_button onclick="return checkAll(true);">&nbsp;
+<input type=button value="очистить всё" class=small_button onclick="return checkAll(false);">
+<input type=button value="очистить с файлами" class=small_button onclick="return checkAll(false, 8);">
+<input type=button value="очистить с включениями" class=small_button onclick="return checkAll(false, 16);">
+<input type=button value="очистить с отзывами" class=small_button onclick="return checkAll(false, 32);">
+<p>
+<input type=submit value="удалить" class=button onclick="return confirm(&quot;Удалить выбранные объекты?&quot;);">
+</form>
+
+<script type='text/javascript'>
+function initSearch()
+{
+	var f = document.forms['search'];
+	if (f)
+	{
+		var e = f.elements['s'];
+		if (e && !e.value) e.focus();
+	}
+}
+
+function checkAll(checked, flags)
+{
+	var f = document.forms['deleter'];
+	if (f)
+	{
+		for (var i = 0; i< f.elements.length; i++)
+		{
+			var e = f.elements[i];
+			if (e.type == 'checkbox' && (!flags || parseInt(e.value) & flags)) e.checked = checked;
+		}
+	}
+
+	return false;
+}
+
+onLoadAction.push(initSearch);
+</script>

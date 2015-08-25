@@ -1,0 +1,92 @@
+<script type='text/javascript'>
+function ad_on_init_container(n)
+{
+	if (n)
+	{
+		var b = document.getElementById('ad_footer');
+		if (b) b.style.display = 'block';
+	}
+}
+
+function ad_init(ad_num)
+{
+	var e = document.getElementById('ad_scroll');
+	if (e)
+	{
+		var ad_extra = typeof(hitua) == 'undefined' ? '' : hitua.poll_sex + ';' + hitua.poll_age;
+
+		var js = document.createElement('script');
+		js.type = 'text/javascript';
+		js.charset = 'utf-8';
+		js.src = 'http://b.c8.net.ua/show?e562&' + Math.round(Math.random() * 1000000000) + '&24&6&x100&86&' + ad_extra + '&' + ad_num;
+
+		e.appendChild(js);
+	}
+}
+
+(function(e_id)
+{
+	function addEvent(e, t, f)
+	{
+		if (e.addEventListener) e.addEventListener(t, f, false);
+		else if (e.attachEvent) e.attachEvent('on' + t, f)
+	}
+
+	function removeEvent(e, t, f)
+	{
+		if (e.removeEventListener) e.removeEventListener(t, f, false);
+		else if (e.detachEvent) e.detachEvent('on' + t, f)
+	}
+
+	var BannerLoader =
+	{
+		top:	0,
+		cm:	document.compatMode == "CSS1Compat",
+
+		scroll: function ()
+		{
+			var ch = self.innerHeight || this.cm && document.documentElement.clientHeight || document.body.clientHeight;
+			var st  = self.pageYOffset || this.cm && document.documentElement.scrollTop || document.body.scrollTop;
+
+			if (this.top >= st && st + ch >= this.top)
+			{
+				removeEvent(window, 'scroll', this.sfunc);
+
+				ad_init(1);
+				ad_init(2);
+				ad_init(3);
+			}
+		},
+
+		sfunc: function(){BannerLoader.scroll()},
+
+		init: function()
+		{
+			var t = this;
+			var e = document.getElementById(e_id);
+			if (e)
+			{
+				while(e.offsetParent)
+				{
+					t.top += e.offsetTop; e = e.offsetParent;
+				}
+
+				addEvent(window, 'scroll', this.sfunc);
+				t.scroll();
+			}
+		}
+	};
+
+	addEvent(window, 'load', function(){BannerLoader.init()});
+})('ad_scroll');
+
+</script>
+
+<div id=ad_scroll></div>
+<div id=ad_footer style='margin-top: 16px; display: none;'>
+
+<table width='100%' cellpadding=16 cellspacing=0 border=0 style='border: 1px solid #ddd;'>
+<tr><td width=33% id=ad_container_1></td><td id=ad_container_2></td><td width=33% id=ad_container_3></td></tr>
+</table>
+
+</div>

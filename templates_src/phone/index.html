@@ -1,0 +1,84 @@
+<script src='/js/swfobject.js' type='text/javascript'></script>
+
+<div id='phonecontent'>phonecontent</div>
+<div id='status'></div>
+
+<script type='text/javascript'>
+
+var phone = null;
+
+swfobject.embedSWF("/swf/phone.swf", "phonecontent", "250", "250", "9", "/swf/expressinstall.swf",
+	{
+		ukey:			"_KEY_",
+		sa:			"77.120.115.147",
+		sp:			"1935"
+	},
+	{
+		bgcolor:		"#005500",
+		quality:		"high",
+		scale:			"noscale",
+		allowScriptAccess:	"always",
+		allowFullScreen:	"true" 
+	},
+	{
+	},
+	function(o)
+	{
+		phone = o.ref;
+	}
+);
+
+function invited(login)
+{
+	status("invited: " + login);
+}
+
+function accepted()
+{
+	status("accepted");
+}
+
+function rejected()
+{
+	status("rejected");
+}
+
+function byed()
+{
+	status("byed");
+}
+
+function cancelled()
+{
+	status("cancelled");
+}
+
+function connection(state)
+{
+	status("connection: " + state);
+}
+
+function status(msg)
+{
+	var e = document.getElementById('status');
+	if (e) e.innerHTML += msg + "<br>";
+}
+
+function invite(login)
+{
+	if (phone) phone._invite(login);
+
+	return false;
+}
+
+</script>
+
+<p>
+<span class=r_button><a href='/phone' onclick='if (phone) phone._settings(); return false;'>настройки</a></span>
+<span class=r_button><a href='/phone' onclick='if (phone) phone._accept(); return false;'>ответить</a></span>
+<span class=r_button><a href='/phone' onclick='if (phone) phone._reject("msg"); return false;'>отклонить</a></span>
+<span class=r_button><a href='/phone' onclick='if (phone) phone._bye(); return false;'>завершить</a></span>
+<span class=r_button><a href='/phone' onclick='if (phone) phone._connect(); return false;'>коннект</a></span>
+<span class=r_button><a href='/phone' onclick='if (phone) phone._disconnect(); return false;'>дисконнект</a></span>
+
+_FRIEND_BODY_

@@ -1,0 +1,14 @@
+<h1>{*27}Добавить в моё{/27}</h1>
+<p>
+<form name=edit method=post action='/add_link/_OBJECT_ID_'>
+<input type=hidden name=back value='_BACK_'>
+
+ <input type=radio name=link_id value=4 checked>{*595}запомнить{/595}<br>
+ <input type=radio name=link_id value=6>{*596}на мою домашнюю страницу{/596}<br>
+ <input type=radio name=link_id value=8>{*678}в мои рекомендации{/678}<br>
+ <input type=radio name=link_id value=1>{*597}в мои аватары{/597}<br>
+ <input type=radio name=link_id value=5>{*598}юзерпик при просмотре моего профиля{/598}<br>
+
+<p>
+<input type=submit value="{*599}добавить{/599}" class=button>
+</form>

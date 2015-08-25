@@ -1,14 +1,23 @@
-#main {
-  color: blue;
-  font-size: 0.3em;
+$textColor: rgb(37,37,37);
+$linkColor: rgba(0,163,239,1);
+$linkColorUnderline: rgba(0,163,239,.35);
+$mainSprite: url("/img/ex_sprite.png"); 
 
-  a {
-    font: {
-      weight: bold;
-      family: serif;
-    }
-    &:hover {
-      background-color: #eee;
-    }
+body {
+  color: $textColor;
+  
+  font: {
+    size: 13px;
+    family: Arial;
+  }
+}
+
+a {
+  color: $linkColor;
+  text-decoration: none;
+  border-bottom: 1px dashed $linkColorUnderline;
+
+  &:hover {
+    border-bottom: none;
   }
 }

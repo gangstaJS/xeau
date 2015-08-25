@@ -1,0 +1,112 @@
+// oz
+
+$btnBorderRadius: 3px;
+
+.fox-btn {
+	color: $textColor;
+	padding: 10px 25px;
+	display: inline-block;
+	background-color: #ebebeb;
+	cursor: pointer;
+	transition: all 225ms ease;
+	overflow: hidden;
+
+	border: {
+		radius: $btnBorderRadius;
+	}
+
+	&:hover {
+		opacity: .7;
+	}
+}
+
+.fox-btn-go {
+	@extend .fox-btn;
+	color: #fff;
+	background-color: rgba(0,128,227,1);
+}
+
+.fox-btn-danger {
+	@extend .fox-btn;
+	color: #fff;
+	background-color: rgba(239,83,80,1);
+}
+
+.fox-btn-s {
+	@extend .fox-btn;
+	padding: 7px 25px;
+}
+
+
+// btn with icons
+
+@mixin btn-ico {
+	background-color: #ebebeb;
+	border-radius: $btnBorderRadius;
+	width: auto;
+	height: 29px;
+	display: inline-block;
+	text-align: center;
+	cursor: pointer;
+	overflow: hidden;
+	line-height: 29px;
+
+	&:hover {
+		opacity: .7;
+	}
+
+	&:before {
+		content: '';
+		display: inline-block;
+		position: relative;
+		margin-right: 8px;
+	
+		background: {
+			image: $mainSprite;
+		}
+	}
+
+	&:empty:before {
+		margin-right: auto;
+	}
+}
+
+
+
+.btn-ico-done,
+.btn-ico-mail {
+	@include btn-ico;
+	padding: 0 10px;
+}
+
+.btn-ico-done:before {
+	background-position: left -29px; 
+	top: 2px;
+	width: 17px;
+	height: 12px;
+}
+
+.btn-ico-rotate-l,
+.btn-ico-rotate-r {
+	@include btn-ico;
+	padding: 0 8px;
+}
+
+.btn-ico-rotate-l:before {
+	background-position: left -14px; 
+	top: 2px;
+	width: 14px;
+	height: 14px;
+}
+
+.btn-ico-rotate-r:before {
+	@extend .btn-ico-rotate-l:before;
+	background-position: -15px -14px; 
+}
+
+.btn-ico-mail:before {
+	background-position: left top; 
+	top: 2px;
+	width: 19px;
+	height: 13px;
+}

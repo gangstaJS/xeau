@@ -1,0 +1,92 @@
+<script type='text/javascript'>
+
+var swfu_host = "_HOST_";
+var swfu_fs_id = _FS_ID_;
+var swfu_show_delete = 0;
+var swfu_msg = {
+	300:	"{*300}Ошибка при удалении файла.{/300}",
+	301:	"{*301}приложить файлы{/301}",
+	302:	"{*302}в очереди{/302}",
+	303:	"{*303}отменить{/303}",
+	304:	"{*304}слишком большое кол-во файлов для загрузки.{/304}",
+	305:	"{*305}слишком большой размер файла для загрузки.{/305}",
+	306:	"{*306}нет доступа к файлу или файл пустой.{/306}",
+	307:	"{*307}файлы данного типа запрещены для загрузки.{/307}",
+	308:	"{*308}загружается{/308}",
+	309:	"{*309}загружено{/309}",
+	310:	"{*310}загружен, сохраняется на диске...{/310}",
+	311:	"{*311}ошибка{/311}",
+	312:	"{*312}загружен{/312}",
+	313:	"{*313}копировать{/313}",
+	314:	"{*314}Удалить файл?{/314}",
+	315:	"{*315}удалить{/315}",
+	316:	"{*316}ошибка при сохранении файла{/316}",
+	317:	"{*317}Загрузка будет прекращена, если Вы покините данную страницу.{/317}"
+};
+
+function updatePostParams()
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		var e = f.elements['avatar_id'];
+		if (e) swfu.addPostParam('avatar_id', e.options[e.selectedIndex].value);
+	}
+}
+
+var swfu_post_params = {
+	key		: "_KEY_",
+	object_id	: _OBJECT_ID_,
+	public		: -1,
+	action_id	: 1
+};
+
+function viewObject()
+{
+	window.location = '/view/_OBJECT_ID_';
+	return true;
+}
+
+function viewBack()
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		var back = f.elements['back'].value;
+		if (back)
+		{
+			window.location = back;
+			return true;
+		}
+	}
+
+	history.back();
+	return false;
+}
+
+</script>
+<script src='/js/swfupload.js' type='text/javascript' charset='utf-8'></script>
+<script src='/js/swfu.js' type='text/javascript' charset='utf-8'></script>
+
+_PICTURE_<a href='/view/_OBJECT_ID_'><b>_TITLE_</b></a><br>
+<a href='/user/_LOGIN_'>_LOGIN_</a>, <small>_CREATE_TIME_</small><p>
+<br clear=all>
+
+<form name=edit method=post action='/upload/_OBJECT_ID_'>
+<input type=hidden name=back value='_BACK_'>
+<table border=0 cellpadding=4 cellspacing=8>
+<tr><td colspan=3 align=center><h1>{*10}Добавить файлы в раздел{/10}</h1></td></tr>
+<tr><td align=right>{*557}юзерпик{/557}:</td><td>_SELECT_AVATAR_</td><td rowspan=2 width=120 valign=top align=right><img id=avatar src='/i/e.gif' width=1 height=1 class=captcha></td></tr>
+<tr><td></td><td>{*558}Для каждого загруженного файла будет создан отдельный объект в разделе.{/558}<p><input type=button value="{*559}смотреть{/559}" class=button onclick="return viewObject();">&nbsp;<input type=button value="{*560}назад{/560}" class=button onclick="return viewBack();"></td></tr>
+</table>
+</form>
+
+<table class=list width=800 cellpadding=0 cellspacing=0 border=0 id=uploadTable>
+<tr><td><b>{*561}Файлы{/561}:</b></td><td width=120>&nbsp;</td><td width=120>&nbsp;</td><td width=120>&nbsp;</td></tr>
+</table>
+
+<table width=800 border=0 cellpadding=0 cellspacing=0><tr>
+<td><span id=uploadButton>{*539}приложить файлы{/539}</span></td>
+<td class=small style='color: #eee;'>fs_FS_ID_</td>
+<td align=right class=small>{*562}Для загрузки нескольких файлов, при выделении, используйте Ctrl и Shift.{/562}</td>
+</tr></table>

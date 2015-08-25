@@ -1,0 +1,213 @@
+<script type='text/javascript'>
+
+var swfu_host = "_HOST_";
+var swfu_fs_id = _FS_ID_;
+var swfu_uid = _UID_;
+var swfu_show_delete = 1;
+var swfu_storage_key = '_KEY_';
+var statusTimeoutId = 0;
+var swfu_msg = {
+	300:	"{*300}Ошибка при удалении файла.{/300}",
+	301:	"{*301}приложить файлы{/301}",
+	302:	"{*302}в очереди{/302}",
+	303:	"{*303}отменить{/303}",
+	304:	"{*304}слишком большое кол-во файлов для загрузки.{/304}",
+	305:	"{*305}слишком большой размер файла для загрузки.{/305}",
+	306:	"{*306}нет доступа к файлу или файл пустой.{/306}",
+	307:	"{*307}файлы данного типа запрещены для загрузки.{/307}",
+	308:	"{*308}загружается{/308}",
+	309:	"{*309}загружено{/309}",
+	310:	"{*310}загружен, сохраняется на диске...{/310}",
+	311:	"{*311}ошибка{/311}",
+	312:	"{*312}загружен{/312}",
+	313:	"{*313}копировать{/313}",
+	314:	"{*314}Удалить файл?{/314}",
+	315:	"{*315}удалить{/315}",
+	316:	"{*316}ошибка при сохранении файла{/316}",
+	317:	"{*317}Загрузка будет прекращена, если Вы покините данную страницу.{/317}"
+};
+
+function updatePostParams()
+{
+}
+
+var swfu_post_params = {
+	key		: "_KEY_",
+	object_id	: _OBJECT_ID_,
+	action_id	: 2,
+	dpr		: (window.devicePixelRatio || 1)
+};
+
+function deleteObject()
+{
+	if (confirm("{*618}Удалить объект?{/618}"))
+	{
+		window.location = '/delete_object/_KEY_';
+	}
+	return true;
+}
+
+function viewObject()
+{
+	window.location = '/_KEY_';
+	return true;
+}
+
+function viewBack()
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		var back = f.elements['back'].value;
+		if (back)
+		{
+			window.location = back;
+			return true;
+		}
+	}
+
+	history.back();
+	return false;
+}
+
+function saveObject()
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		request_post('/r_edit_storage/_KEY_', {
+				title		: f.elements['title'].value,
+				post		: f.elements['post'].value
+			}, saveObjectResponse, _OBJECT_ID_);
+
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+function updateStatus(msg, className)
+{
+	statusTimeoutId = 0;
+
+	var e = document.getElementById('saveStatus');
+	if (e)
+	{
+		e.className = className;
+		e.innerHTML = msg;
+	}
+}
+
+function saveObjectResponse(code, data, object_id)
+{
+	if (code != 200 || data != '1') updateStatus("{*619}ошибка при сохранении{/619}", 'upload_error');
+	else updateStatus("{*620}сохранен{/620}", 'upload_success');
+
+	if (statusTimeoutId) clearTimeout(statusTimeoutId);
+	statusTimeoutId = setTimeout("updateStatus('', '')", 2000);
+}
+
+// ---
+
+</script>
+<script src='/js/swfupload.js' type='text/javascript' charset='utf-8'></script>
+<script src='/js/swfu.js?0.02' type='text/javascript' charset='utf-8'></script>
+
+
+<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="/mail-test/mail.css?0.07" />
+<script src="/mail-test/mail.js?0.02"></script>
+
+
+<div id="mail-window">
+	<div class="mail-title">
+		<b>Логин<!-- {*908}Новое письмо{/908} --></b> <span></span>
+		<i class="mail-close"><i></i></i>
+		<i class="mail-minimize"><i></i></i>
+	</div>
+	<div class="mail-body">
+		<input id="mail-to" class="mail-input" placeholder="{*916}Кому{/916}" value="">
+		<input id="mail-subject" class="mail-input" placeholder="{*917}Тема{/917}" value="">
+		<div id="mail-editor" class="mail-editor" contenteditable="true"></div>
+		<div class="mail-filelist"></div>
+		<div class="mail-buttons">
+			<a href="javascript:" class="mail-send animate">{*909}Отправить{/909}</a>
+			<a href="javascript:" class="mail-cansel">{*910}Отмена{/910}</a>
+		</div>
+	</div>
+	<div class="mail-login">
+		<div class="mail-buttons">
+			<a href="https://mail.ex.ua" target="_blank">
+				<img src="/mail-test/exmail.png">
+			</a>
+			<input name="login" placeholder="Логин" value="" type="text">
+			<input name="password" placeholder="Пароль" value="" type="password">
+			<div class="mail-row">
+				<div id="err_message"></div>
+			</div>
+			<!-- <div class="mail-captcha"></div> -->
+			<!-- <input id="mail-password" placeholder="Текст с картинки" value=""> -->
+			<button class="mail-login-button">{*911}Войти{/911}</button>
+			<div class="mail-row">
+				<label>
+					<input name='stay_signed' type="checkbox" value="1">
+					{*912}Чужой компьютер{/912}
+				</label>
+			</div>
+			<div class="mail-row mail-bottom">
+				{*913}Нет аккаунта?{/913}
+				<a href="https://mail.ex.ua/#!signup" target="_blank">{*914}Создать{/914}</a>
+			</div>
+		</div>
+	</div>
+	<div class="mail-alert">
+		<div class="mail-buttons"><a href="https://mail.ex.ua/#!sent">{*915}Сообщение отправлено.{/915}</a></div>
+	</div>
+</div>
+
+
+<table width=100% border=0 cellpadding=4 cellspacing=8>
+<form name=edit method=post action='/edit_storage/_KEY_'>
+<input type=hidden name=back value='_BACK_'>
+<tr><td colspan=3 align=center><h1>{*17}Редактирование{/17}</h1>_MESSAGE_</td></tr>
+<tr><td width=140 align=right>{*609}ключ доступа{/609}:</td><td>{*610}<b>_KEY_</b> или страница{/610} <b>http://_HOST_/_KEY_</b><br><span class=small>{*611}Сохраните данный ключ, доступ к данной информации возможен только по нему.{/611}</small></td><td>&nbsp;</td></tr>
+<tr><td align=right>{*612}заголовок{/612}:</td><td><input type=text name=title value='_TITLE_' style='width: 100%' maxlength=255></td><td rowspan=2></td></tr>
+<tr><td align=right>{*613}текст{/613}:</td><td><textarea name=post rows=16 style='width: 100%' maxlength=65535>_POST_</textarea></td></tr>
+<tr><td></td><td>
+ <input type=submit value="{*614}сохранить{/614}" class=button onclick="return saveObject();">&nbsp;
+ <input type=button value="{*615}смотреть{/615}" class=button onclick="return viewObject();">&nbsp;
+ <input type=button value="{*616}удалить{/616}" class=button onclick="return deleteObject();">
+ <span id=saveStatus class=small></span>
+</td><td></td></tr>
+</form>
+</table>
+
+<table class=list width=100% cellpadding=0 cellspacing=0 border=0 id=uploadTable>
+<tr><td><b>{*538}Файлы в объекте{/538}:</b></td><td width=120>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+_FILE_BODY_
+</table>
+
+<table width=100% border=0 cellpadding=0 cellspacing=0><tr>
+ <td><span id=uploadButton>{*539}приложить файлы{/539}</span></td>
+ <td class=small style='color: #eee;'>fs_FS_ID_</td>
+ <td align=right class=small>{*617}Для загрузки нескольких файлов, при выделении, используйте Ctrl и Shift.{/617}</td>
+</tr></table>
+
+<script type='text/javascript'>
+function initEdit()
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		var e = f.elements['post'];
+		if (e) e.focus();
+	}
+}
+
+onLoadAction.push(initEdit);
+</script>

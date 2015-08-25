@@ -1,0 +1,36 @@
+<script type='text/javascript'>
+
+function viewBack()
+{
+	var f = document.forms['edit'];
+	if (f)
+	{
+		var back = f.elements['back'].value;
+		if (back)
+		{
+			window.location = back;
+			return true;
+		}
+	}
+
+	history.back();
+	return false;
+}
+
+</script>
+
+<table border=0 cellpadding=4 cellspacing=8>
+<form method=post name=edit action='/move_file_KEY_URL_/_UPLOAD_ID_'>
+<input type=hidden name=back value='_BACK_'>
+<tr><td colspan=2 align=center><h1>{*19}Операции с файлом{/19}</h1>_MESSAGE_</td></tr>
+<tr><td align=right>*{*621}объект источник{/621}:</td><td>_UPLOAD_OBJECT_</td></tr>
+<tr><td align=right>*{*622}имя файла{/622}:</td><td>_UPLOAD_NAME_</td></tr>
+<tr><td align=right>*{*623}действие{/623}:</td><td>_SELECT_ACTION_</td></tr>
+<tr><td align=right>*{*624}объект назначения{/624}:</td><td><input type=text name=object_id value=_OBJECT_ID_ style='width: 100px' maxlength=12></td></tr>
+<tr><td align=right>*{*625}имя файла{/625}:</td><td><input type=text name=name value='_NAME_' style='width: 320px' maxlength=128></td></tr>
+<tr><td></td><td>
+<input type=submit value="{*626}выполнить{/626}" class=button>&nbsp;
+<input type=button value="{*627}отменить{/627}" class=button onclick="return viewBack();">
+</td></tr>
+</form>
+</table>

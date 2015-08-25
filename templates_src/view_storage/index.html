@@ -1,0 +1,66 @@
+
+<script src="/js/jquery.min.js"></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="/mail-test/mail.css?0.07" />
+<script src="/mail-test/mail.js?0.05"></script>
+
+<div id="mail-window">
+	<div class="mail-title">
+		<b>Логин<!-- {*908}Новое письмо{/908} --></b> <span></span>
+		<i class="mail-close"><i></i></i>
+		<i class="mail-minimize"><i></i></i>
+	</div>
+	<div class="mail-body">
+		<input id="mail-to" class="mail-input" placeholder="{*916}Кому{/916}" value="">
+		<input id="mail-subject" class="mail-input" placeholder="{*917}Тема{/917}" value="">
+		<div id="mail-editor" class="mail-editor" contenteditable="true"></div>
+		<div class="mail-filelist"></div>
+		<div class="mail-buttons">
+			<a href="javascript:" class="mail-send animate">{*909}Отправить{/909}</a>
+			<a href="javascript:" class="mail-cansel">{*910}Отмена{/910}</a>
+		</div>
+	</div>
+	<div class="mail-login">
+		<div class="mail-buttons">
+			<a href="https://mail.ex.ua" target="_blank">
+				<img src="/mail-test/exmail.png">
+			</a>
+			<input name="login" placeholder="Логин" value="" type="text">
+			<input name="password" placeholder="Пароль" value="" type="password">
+			<div class="mail-row">
+				<div id="err_message"></div>
+			</div>
+			<!-- <div class="mail-captcha"></div> -->
+			<!-- <input id="mail-password" placeholder="Текст с картинки" value=""> -->
+			<button class="mail-login-button">{*911}Войти{/911}</button>
+			<div class="mail-row">
+				<label>
+					<input name='stay_signed' type="checkbox" value="1">
+					{*912}Чужой компьютер{/912}
+				</label>
+			</div>
+			<div class="mail-row mail-bottom">
+				{*913}Нет аккаунта?{/913}
+				<a href="https://mail.ex.ua/#!signup" target="_blank">{*914}Создать{/914}</a>
+			</div>
+		</div>
+	</div>
+	<div class="mail-alert">
+		<div class="mail-buttons"><a href="https://mail.ex.ua/#!sent">{*915}Сообщение отправлено.{/915}</a></div>
+	</div>
+</div>
+
+{*605}Объект временного хранения с ключом доступа "<b>_KEY_</b>"{/605}:<p>
+_PICTURE_
+<b>_TITLE_</b><br>
+<small>_CREATE_TIME_<span class=modify_time>, _MODIFY_TIME_</span></small><p>
+_POST_
+_INFO_ALIEN_
+_INFO_PLAY_
+<p>
+_BODY_
+<p>&nbsp;<p>
+<span class=r_button><a href='/edit_storage/_KEY_'>{*606}редактировать{/606}</a></span>
+<span class=r_button><a href='/delete_object/_KEY_' onclick="return confirm(&quot;{*608}Удалить объект?{/608}&quot;);">{*607}удалить{/607}</a></span>

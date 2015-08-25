@@ -2,13 +2,74 @@
 <html>
 <head>
 	<title>Common styles</title>
-	<link rel="stylesheet" type="text/css" href="/build/css/common.min.css">
+	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="img/favicon.png">
+	<link rel="stylesheet" type="text/css" href="build/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="build/css/common.min.css">
 </head>
 <body>
 
-<div class="t">Hello</div>
-<p>test test</p>
-<a href="#">tan</a>
+<div class="wrapper">
+	<ul class="nav-menu">
+		<li><a href="common.html#buttons">Кнопки</a></li>
+		<li><a href="common.html#inputs">Инпуты</a></li>
+		<li><a href="common.html#links">Сылки</a></li>
+		<li><a href="common.html#modals">Модальные окна</a></li>
+	</ul>
+	
+	<section class="content">
+		<section name="buttons">
+			<h3>Кнопки</h3>
+		
+			<div class="fox-btn">смотреть</div>
+			<div class="fox-btn-go">сохранить</div>
+			<div class="fox-btn-danger">удалить страницу</div>
+
+			<hr>
+
+			<i class="btn-ico-done"></i>
+			<i class="btn-ico-rotate-l"></i>
+			<i class="btn-ico-rotate-r"></i>
+			<i class="btn-ico-mail"></i>
+
+			<div class="fox-btn-s">копировать</div>
+			<div class="fox-btn-s">удалить</div>
+
+			<hr>
+
+			<i class="btn-ico-done">готово</i>
+			<i class="btn-ico-rotate-l">повернуть влево</i>
+			<i class="btn-ico-rotate-r">повернуть вправо</i>
+			<i class="btn-ico-mail">написать</i>
+		
+			<!-- // -->
+		</section>
+
+		<!-- // -->
+	
+		<section name="inputs">
+			<h3>Инпуты</h3>
+
+			<label>
+				<span class="label-text">Текст:</span>
+				<input type="text">
+			</label>
+
+			<label>
+				<span class="label-text">Текст:</span>
+				<textarea></textarea>
+			</label>
+
+			<hr>
+
+			<input type="text" placeholder="Текст">
+
+			<textarea placeholder="Текст"></textarea>
+		
+			<!-- // -->
+		</section>
+	</section>
+</div>
 
 </body>
 </html>

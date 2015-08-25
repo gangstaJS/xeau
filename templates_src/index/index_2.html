@@ -1,0 +1,35 @@
+<center style='margin-top: 24px;'>
+
+<img src='/i/fob.png' alt='FOB.kz' title='FOB.kz' width=181 height=37 border=0><p>
+<h1>{*600}"Экспресс файлы" - сервис обмена информацией.{/600}</h1><p>
+{*601}
+Вы можете анонимно воспользоваться сервисом хранения, пересылки и обмена файлов, в этом случае<br>
+доступ к объекту будет возможен только с помощью ключа, который Вы получите при создании объекта.<p>
+Если объект не использовался более 30 дней, он может быть удален системой.
+{/601}
+<p>
+<form method=post action='/edit_storage'>
+<input type=submit value="{*602}создать{/602}" class=button>
+</form>
+<p>
+{*603}Для получения доступа к информации по ключу можете воспользоваться формой ниже.{/603}
+<p>
+<form method=post action='/storage'>
+<input type=text name=key value='' style='width: 120px' autocomplete=off maxlength=12><p>
+<input type=submit value="{*604}получить{/604}" class=button>
+</form>
+</center>
+
+<script type='text/javascript'>
+function initStorage()
+{
+	var f = document.forms['storage'];
+	if (f)
+	{
+		var e = f.elements['key'];
+		if (e) e.focus();
+	}
+}
+
+onLoadAction.push(initStorage);
+</script>
